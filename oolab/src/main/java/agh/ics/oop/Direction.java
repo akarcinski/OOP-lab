@@ -4,7 +4,8 @@ public enum Direction {
     FORWARD("f"),
     BACKWARD("b"),
     RIGHT("r"),
-    LEFT("l");
+    LEFT("l"),
+    NONE("");
 
     private final String dir;
 
@@ -12,9 +13,7 @@ public enum Direction {
         this.dir = dir;
     }
 
-    public String getDir() {
-        return dir;
-    }
+
     public static Direction[] parse(String[] input) {
         Direction[] enums = new Direction[input.length];
         for(int i = 0; i < input.length; i++) {
@@ -23,7 +22,7 @@ public enum Direction {
                 case "b" -> Direction.BACKWARD;
                 case "r" -> Direction.RIGHT;
                 case "l" -> Direction.LEFT;
-                default -> null;
+                default -> Direction.NONE;
             };
         }
         return enums;
