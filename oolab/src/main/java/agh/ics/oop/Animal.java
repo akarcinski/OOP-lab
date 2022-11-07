@@ -35,11 +35,17 @@ public class Animal {
             case FORWARD ->  x += orient.toUnitVector().getX();
             case BACKWARD ->   y += orient.toUnitVector().opposite().getY();
         }
-        if (x > 4) { x = 4; }
-        if (x < 0) { x = 0; }
-        if (y > 4) { y = 4; }
-        if (y < 0) { y = 0; }
+
+        if (x > 4)
+            x = 4;
+        else if (x < 0)
+            x = 0;
+
+        if (y > 4)
+            y = 4;
+        else if (y < 0)
+            y = 0;
+
         position = new Vector2d(x, y);
     }
-
 }

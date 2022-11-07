@@ -8,14 +8,10 @@ public class OptionsParser {
        for(String arg: input) {
            arg = arg.toLowerCase(Locale.ROOT);
            switch (arg) {
-               case "f" -> parsed.add(MoveDirection.FORWARD);
-               case "forward" -> parsed.add(MoveDirection.FORWARD);
-               case "b" -> parsed.add(MoveDirection.BACKWARD);
-               case "backward" -> parsed.add(MoveDirection.BACKWARD);
-               case "r" -> parsed.add(MoveDirection.RIGHT);
-               case "right" -> parsed.add(MoveDirection.RIGHT);
-               case "l" -> parsed.add(MoveDirection.LEFT);
-               case "left" -> parsed.add(MoveDirection.LEFT);
+               case "f",  "forward"-> parsed.add(MoveDirection.FORWARD);
+               case "b", "backward" -> parsed.add(MoveDirection.BACKWARD);
+               case "r", "right" -> parsed.add(MoveDirection.RIGHT);
+               case "l", "left" -> parsed.add(MoveDirection.LEFT);
            }
        }
 
