@@ -1,6 +1,10 @@
-agh/ics/oop/MapDirectionTest.java
- agh.ics.oop.MapDirectionTest
 agh/ics/oop/DirectionTest.java
  agh.ics.oop.DirectionTest
 agh/ics/oop/Vector2dTest.java
  agh.ics.oop.Vector2dTest
+agh/ics/oop/MapDirectionTest.java
+ agh.ics.oop.MapDirectionTest
+agh/ics/oop/OptionParserTest.java
+ agh.ics.oop.OptionParserTest
+agh/ics/oop/AnimalTest.java
+ agh.ics.oop.AnimalTest

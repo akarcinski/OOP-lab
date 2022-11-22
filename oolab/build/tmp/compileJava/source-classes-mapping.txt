@@ -7,10 +7,10 @@ agh/ics/oop/MapDirection.java
  agh.ics.oop.MapDirection$1
 agh/ics/oop/Vector2d.java
  agh.ics.oop.Vector2d
+agh/ics/oop/OptionsParser.java
+ agh.ics.oop.OptionsParser
 agh/ics/oop/Animal.java
  agh.ics.oop.Animal
  agh.ics.oop.Animal$1
-agh/ics/oop/OptionsParser.java
- agh.ics.oop.OptionsParser
 agh/ics/oop/World.java
  agh.ics.oop.World
