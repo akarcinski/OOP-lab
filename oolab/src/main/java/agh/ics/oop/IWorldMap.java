@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface IWorldMap {
@@ -40,4 +41,6 @@ public interface IWorldMap {
      * @return Object or null if the position is not occupied.
      */
     Object objectAt(Vector2d position);
+
+    HashMap<Vector2d, AbstractWorldMapElement> getMap();
 }

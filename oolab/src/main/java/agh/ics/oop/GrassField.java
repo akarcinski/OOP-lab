@@ -1,27 +1,14 @@
 package agh.ics.oop;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class GrassField extends AbstractWorldMap{
+public class GrassField extends AbstractWorldMap {
     int numberOfGrass;
+
     public GrassField(int numberOfGrass) {
         this.numberOfGrass = numberOfGrass;
-        map = new LinkedList<>();
-        gmap = new LinkedList<>();
-        for (int i=0; i<numberOfGrass; i++) {
-            int x =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-            int y =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-            Vector2d position = new Vector2d(x, y);
-            gmap.add(new Grass(position));
-            updateCorners(position);
+        super.mapBoundary = new MapBoundary();
+        for (int i = 0; i < numberOfGrass; i++) {
+            addGrass();
         }
-    }
-    public List<Animal> getMap() {
-        return map;
-    }
-    public List<Grass> getGMap() {
-        return gmap;
     }
 
     @Override
@@ -33,36 +20,10 @@ public class GrassField extends AbstractWorldMap{
 
             Object obj = objectAt(position);
             if (obj == null) {
-                updateCorners(position);
+                //updateCorners(position);
                 return true;
-            }
-            else if(obj instanceof Grass) {
-                boolean possible = false;
-                for (int i=0; i<=(int)(Math.sqrt(10*numberOfGrass)+1); i++) {
-                    for (int j=0; j<=(int)(Math.sqrt(10*numberOfGrass)+1); j++) {
-                        if (!isOccupied(new Vector2d(i, j))) {
-                            possible = true;
-                            break;
-                        }
-                    }
-                    if (possible)
-                        break;
-                }
-                if (!possible)
-                    return false;
-
-                gmap.remove((Grass) obj);
-                int x =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-                int y =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-                while(isOccupied(new Vector2d(x, y))) {
-                    x =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-                    y =  (int)(Math.random() * (Math.sqrt(10*numberOfGrass)  + 1));
-                }
-                Vector2d pos = new Vector2d(x, y);
-                Grass grass = new Grass(pos);
-                gmap.add(grass);
-                updateCorners(pos);
-                return true;
+            } else if (obj instanceof Grass) {
+                return addGrass();
             }
 
             return !isOccupied(position);
@@ -72,38 +33,54 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        try {
-            for (Animal animal : map)
-                if (position.equals(animal.getPlace()))
-                    return true;
+        return super.isOccupied(position);
 
-            for (Grass grass : gmap)
-                if (position.equals(grass.getPosition()))
-                    return true;
-
-        } catch (NullPointerException exception) {
-            System.out.println(exception);
-            return true;
-        }
-        updateCorners(position);
-        return false;
+        //updateCorners(position);
     }
 
-    @Override
-    public Object objectAt(Vector2d position) {
-        try {
-            for (Animal ani : map)
-                if (ani.isAt(position))
-                    return ani;
+    public boolean addGrass() throws IllegalArgumentException{
+        boolean possible = false;
+        Vector2d possiblePosition = new Vector2d(0, 0);
+        int range = (int) (Math.sqrt(10 * numberOfGrass) + 1);
 
-            for (Grass grass: gmap)
-                if (grass.getPosition().equals(position))
-                    return grass;
+        Vector2d p = new Vector2d(0,1);
+        map.put(p, new Grass(p));
+        mapBoundary.addPosition(p);
 
-        } catch (NullPointerException exception) {
-            System.out.println(exception);
-            return null;
+        for (int i = 0; i <= range; i++) {
+            for (int j = 0; j <= range; j++) {
+                if (!isOccupied(new Vector2d(i, j))) {
+                    possible = true;
+                    possiblePosition = new Vector2d(i, j);
+                    break;
+                }
+            }
+            if (possible)
+                break;
         }
-        return null;
+        if (!possible)
+            throw new IllegalArgumentException("grass can't be added");
+
+        int x = (int) (Math.random() * (Math.sqrt(10 * numberOfGrass) + 1));
+        int y = (int) (Math.random() * (Math.sqrt(10 * numberOfGrass) + 1));
+        Vector2d position = new Vector2d(x, y);
+
+        for (int i = 0; i < 100; i++) {
+            if (isOccupied(position)) {
+                x = (int) (Math.random() * (Math.sqrt(10 * numberOfGrass) + 1));
+                y = (int) (Math.random() * (Math.sqrt(10 * numberOfGrass) + 1));
+                position = new Vector2d(x, y);
+            } else {
+                map.put(position, new Grass(position));
+                mapBoundary.addPosition(position);
+                //updateCorners(position);
+                return true;
+            }
+        }
+
+        map.put(possiblePosition, new Grass(possiblePosition));
+        mapBoundary.addPosition(possiblePosition);
+
+        return true;
     }
 }

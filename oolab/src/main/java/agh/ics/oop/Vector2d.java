@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Vector2d {
@@ -55,11 +56,11 @@ public class Vector2d {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
         if (this == obj) {
             return true;
-        }
-        if (this == null) {
-            return false;
         }
         if (this.getClass() != obj.getClass()) {
             return false;

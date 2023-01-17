@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AnimalTest {
     @Test
     void isAt() {
-        RectangularMap map = new RectangularMap();
+        RectangularMap map = new RectangularMap(4, 4);
         Animal Jerry = new Animal(map);
 
         assertTrue(Jerry.isAt(new Vector2d(2,2)));
@@ -15,7 +15,7 @@ public class AnimalTest {
     }
     @Test
     void move() {
-        RectangularMap map = new RectangularMap();
+        RectangularMap map = new RectangularMap(4,4);
         Animal Jerry = new Animal(map);
 
         assertTrue(Jerry.isAt(new Vector2d(2,2)));

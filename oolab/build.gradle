@@ -1,5 +1,7 @@
 plugins {
+    id 'application'
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 group 'org.example'
@@ -9,11 +11,22 @@ repositories {
     mavenCentral()
 }
 
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls' ]
+
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    //implementation 'org.openjfx:javafx-media:20-ea+9'
+    implementation group: 'org.openjfx', name: 'javafx-media', version: '20-ea+9'
 }
 
 test {
     useJUnitPlatform()
+}
+application {
+    mainClassName = 'agh.ics.oop.World'
 }
